@@ -11,27 +11,24 @@ for score in scores:
 	for x in range(len(score)):
 		score[x] = int(score[x])
 	all_games.append(score)
-
-
 for game in range(len(all_games)):
 	current = all_games[game]
 	if game_count >= 5:
 		print(f'error line {game+1}')
 		checker = False
 		break
+		
 	if max(current) < 11:
 		continue
-	elif abs(current[1] - current[0]) >= 2:
-		game_count += 1
-		
+	elif abs(current[1] - current[0]) >= 2 and max(all_games[game+1]) < max(current):
+		game_count += 1	
 	else:
-		if max(all_games[game+1]) < max(current):
-			print(f'error line {game+2}')
-			checker = False
-			break
+		print(f'error line {game+2}')
+		checker = False
+		break
 # it is +2 because python counts from 0 but the lines start at 1 so I add one more to compensate
 
-if game_count != 5:
+if game_count != 5 and checker == True:
 	print('incomplete')
 elif checker == True:
 	print('Complete')
